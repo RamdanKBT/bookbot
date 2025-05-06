@@ -4,9 +4,16 @@ from stats import sort_characters_counts
 import sys
 
 def get_book_text(path_to_file):   
-    with open(path_to_file, "r" , encoding="utf-8") as f:
-       text = f.read()
-    return text
+    try:
+        with open(path_to_file, "r" , encoding="utf-8") as f:
+            text = f.read()
+        return text
+    except FileNotFoundError:
+        print(f"Error: File not found at '{book_file_path}'")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Error reading file: {e}")
+        sys.exit(1)
 
 
 def main():
